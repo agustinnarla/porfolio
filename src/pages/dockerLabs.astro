@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { pages } from '../data/labs.js';
+
+type Machine = { name: string; difficulty: string; techniques: string };
+
+const lab = pages.find((p) => p.id === 'docker-labs');
+
+const groups: Record<string, Machine[]> = {};
+if (lab) {
+  for (const m of lab.machines) {
+    const key = m.difficulty || 'Otros';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(m as Machine);
+  }
+}
+---
+
+<Layout>
+  <Header section="desarrollo" currentPage="/dockerLabs" />
+
+  <div class="p-8 max-w-4xl mx-auto">
+    {lab ? (
+      <>
+        <h1 class="text-4xl font-bold mb-4">{lab.title}</h1>
+        <p class="text-gray-600 mb-6">{lab.description}</p>
+
+        <div class="space-y-6">
+          {Object.entries(groups).map(([difficulty, machines]) => (
+            <details class="bg-white rounded-xl shadow-md overflow-hidden">
+              <summary class="cursor-pointer px-6 py-4 flex items-center justify-between text-gray-800 font-semibold">
+                <span>{difficulty} <span class="text-sm text-gray-500 ml-2">({machines.length})</span></span>
+                <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="none" aria-hidden>
+                  <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-4 pt-2 space-y-3">
+                {machines.map((m) => (
+                  <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50">
+                    <div>
+                      <h4 class="font-medium">{m.name}</h4>
+                      <p class="text-sm text-gray-500">Técnicas: {m.techniques}</p>
+                    </div>
+                    <a href={m.writeupPdf} class="px-3 py-1.5 bg-[#61A2A7] text-white rounded-md text-sm">Ver writeup</a>
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </>
+    ) : (
+      <div class="text-center py-20">
+        <p class="text-gray-600">Lab no encontrado.</p>
+      </div>
+    )}
+  </div>
+</Layout>

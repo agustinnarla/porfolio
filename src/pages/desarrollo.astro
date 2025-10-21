@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MyData from '../components/MyData.astro';
+import Stack from '../components/Stack.astro';
+import Project from '../components/Project.astro';
+---
+
+<Layout>
+  <Header section="desarrollo" currentPage="/desarrollo" />
+  <div class="p-8">
+    <h1 class="text-5xl font-bold mb-4 text-gray-900">Desarrollo de Software</h1>
+      <p class="text-xl text-gray-600">Bienvenido a mi portfolio de desarrollo</p>
+    <MyData section="desarrollo" />
+    <Stack section='desarrollo'/>
+    <Project section='desarrollo'/>
+  </div>
+</Layout>

@@ -1,0 +1,34 @@
+---
+interface Props {
+  section: 'desarrollo' | 'hacking';
+}
+
+const { section } = Astro.props;
+
+const contenido = {
+  desarrollo: {
+    titulo: "Sobre mí",
+    texto: "Como Analista de Sistema y desarrollador de software me gusta trabajar en proyectos desafiantes que me permitan aprender y crecer profesionalmente. Encontrar soluciones a los problemas diarios y crear aplicaciones útiles para el día a día.",
+    colorTexto: "text-gray-700",
+    colorTitulo: "text-[#61A2A7]",
+    bgColor: "bg-blue-50"
+  },
+  hacking: {
+    titulo: "Sobre mí",
+    texto: "Como apasionante pentester, me gusta encontrar vulnerabilidades y fortalecer la seguridad de sistemas mediante pruebas de penetración éticas. Área en la que me estoy formando día a día y cada vez me gusta más. En ella aprendo constantemente y disfruto enfrentándome a nuevos desafíos y retos a partir de los CTF que realizo.",
+    colorTexto: "text-gray-700",
+    colorTitulo: "text-red-600",
+    bgColor: "bg-red-50"
+  }
+};
+---
+<div class="max-w-4xl mx-auto p-8 my-8">
+    <div class={`${contenido[section].bgColor} rounded-2xl shadow-lg p-8 border-l-4 ${section === 'desarrollo' ? 'border-[#61A2A7]' : 'border-red-600'}`}>
+        <h2 class={`text-3xl font-bold ${contenido[section].colorTitulo} mb-4`}>
+            {contenido[section].titulo}
+        </h2>
+        <p class={`text-lg leading-relaxed ${contenido[section].colorTexto}`}>
+            {contenido[section].texto}
+        </p>
+    </div>
+</div>

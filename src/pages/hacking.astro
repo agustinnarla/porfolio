@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MyData from '../components/MyData.astro';
+import Stack from '../components/Stack.astro';
+import Project from '../components/Project.astro';
+---
+
+<Layout>
+  <Header section="hacking" currentPage="/hacking" />
+  <div class="p-8">
+    <h1 class="text-4xl font-bold mb-4">Hacking Red Team</h1>
+    <p>Bienvenido a mi portfolio de hacking</p>
+    <MyData section="hacking" />
+    <Stack section='hacking'/>
+  </div>
+</Layout>

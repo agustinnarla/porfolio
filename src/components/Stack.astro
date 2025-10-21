@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import jsIcon from '../assets/brand-javascript.svg';
+import reactIcon from '../assets/brand-react-native.svg';
+import astroIcon from '../assets/brand-astro.svg';
+import nodeIcon from '../assets/brand-nodejs.svg';
+import gitHubIcon from '../assets/brand-github.svg';
+import sqlIcon from '../assets/sql.svg';
+import pythonIcon from '../assets/brand-python.svg';
+import bashIcon from '../assets/terminal.svg'
+import linuxIcon from '../assets/brand-linux.svg'
+
+interface Props {
+  section: 'desarrollo' | 'hacking';
+}
+
+const { section } = Astro.props;
+
+const tecnologias = {
+  desarrollo: [
+    { nombre: 'JavaScript', icon: jsIcon, tipo: 'svg' },
+    { nombre: 'React-Native', icon: reactIcon, tipo: 'svg'},
+    { nombre: 'Astro', icon: astroIcon, tipo: 'svg' },
+    { nombre: 'Node.js', icon: nodeIcon, tipo: 'svg' },
+    { nombre: 'Git', icon: gitHubIcon, tipo: 'svg' },
+    { nombre: 'SQL', icon: sqlIcon, tipo: 'svg' }
+  ],
+  hacking: [
+    { nombre: 'Burp Suite', icon: '🔥', tipo: 'emoji' },
+    { nombre: 'Python', icon: pythonIcon, tipo: 'svg' },
+    { nombre: 'Metasploit', icon: '💣', tipo: 'emoji' },
+    { nombre: 'Nmap', icon: '🔍', tipo: 'emoji' },
+    { nombre: 'Wireshark', icon: '🦈', tipo: 'emoji' },
+    { nombre: 'Bash', icon: bashIcon, tipo: 'svg' },
+    { nombre: 'SQLMap', icon: '💉', tipo: 'emoji' },
+    { nombre: 'Linux', icon: linuxIcon, tipo: 'svg' }
+  ]
+};
+
+const titulo = section === 'desarrollo' ? 'Stack Tecnológico' : 'Herramientas y Tecnologías';
+const colorTitulo = section === 'desarrollo' ? 'text-[#61A2A7]' : 'text-red-600';
+---
+
+<section class="my-12">
+<h2 class={`text-3xl font-bold ${colorTitulo} mb-6`}>{titulo}</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+{tecnologias[section].map((tech) => (
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105 duration-300 text-center">
+    <div class="flex items-center justify-center mb-2 h-12">
+    {tech.tipo === 'svg' ? (
+    <img
+      src={typeof tech.icon === 'string' ? tech.icon : tech.icon.src}
+      alt={tech.nombre}
+      width={48}
+      height={48}
+      class="w-12 h-12"
+    />
+    ) : (
+    <span class="text-3xl">{tech.icon}</span>
+    )}
+    </div>
+    <p class="font-semibold text-gray-800">{tech.nombre}</p>
+    </div>
+))}
+</div>
+</section>

@@ -1,0 +1,28 @@
+---
+
+import { pages } from '../data/labs.js';
+---
+
+<section class="my-12 max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-[#61A2A7] mb-6">Labs & Challenges</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {pages.map((page) => (
+            <article class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{page.title}</h3>
+                    <p class="text-gray-600 mb-4">{page.description}</p>
+
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Máquinas completadas</p>
+                            <p class="text-2xl font-bold text-gray-900">{page.result}</p>
+                        </div>
+                        <a href={page.href} class="inline-flex items-center gap-3 px-4 py-2 bg-[#61A2A7] text-white rounded-xl font-medium shadow-md hover:bg-[#4f8a8e] transition-colors">
+                            Ver lab
+                        </a>
+                    </div>
+                </div>
+            </article>
+        ))}
+    </div>
+</section>
